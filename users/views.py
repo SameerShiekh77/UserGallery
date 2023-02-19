@@ -5,21 +5,33 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,logout,get_user_model
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import EmailMultiAlternatives
+
+
+
 
 # Create your views here.
 def signup(request):
+    context = {}
+    form = SignUpForm()
+    context['form'] = form
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            print("hello")
             return redirect(loginView)
         else:
-            print(form.errors)
+            form = SignUpForm(request.POST)
 
-    form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+            for field, errors in form.errors.items():
+                context['errors'] =errors
+            context['form'] = form
+            
+            return render(request, 'signup.html', context)
+    else:
+        
+        return render(request, 'signup.html', context)
 
 
 def loginView(request):
@@ -37,10 +49,10 @@ def loginView(request):
 
 def logoutView(request):
     logout(request)
-    return redirect('/')
+    return redirect(loginView)
 
 @login_required(login_url='/login/')
-def change_password(request):
+def     change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -61,10 +73,12 @@ def forget_password(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             active_users = UserModel.objects.filter(email__iexact=email, is_active=True)
+            email_body = "<h4>Hi, Please click on the link to reset your password <a href='http://127.0.0.1:8000/reset-password/' >Resest Password</a></h4>"
             for user in active_users:
-                # send email with password reset link
-                pass
-            return redirect('password_reset_done')
+                msg = EmailMultiAlternatives("Reset Your Password", email_body, 'samshaikh15955@gmail.com', [user.email])
+                msg.attach_alternative(email_body, "text/html")
+                msg.send()
+            return redirect(loginView)
     else:
         form = PasswordResetForm()
     return render(request, 'forget_password.html', {'form': form})

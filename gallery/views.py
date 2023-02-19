@@ -6,7 +6,6 @@ from gallery.forms import PhotoForm
 @login_required(login_url='/login/')
 def upload_image(request):
     user = request.user
-    print(user)
     images = Photo.objects.filter(user=user)
     context = {'images':images}
     if request.method == 'POST':

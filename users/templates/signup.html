@@ -1,108 +1,136 @@
-<!-- signup.html -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Sign Up</title>
-</head>
-<body class="bg-gray-100 h-screen font-sans">
+{% extends 'base.html' %}  
 
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-    <div class="container flex flex-wrap items-center justify-end mx-auto">
-      <!-- <a href="" class="flex items-center">
-          <img src="" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-      </a> -->
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-          </li>
-        </ul>
+{% block body %}
+
+
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="max-w-md w-full py-6 px-8 bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Signup</h1>
+        <form method='POST'> {% csrf_token %}
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="username">
+              Username
+            </label>
+            {{ form.username }}
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="username">
+              First Name
+            </label>
+            {{ form.first_name }}
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="username">
+              Last Name
+            </label>
+            {{ form.last_name }}
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="email">
+              Email Address
+            </label>
+            {{ form.email }}
+
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="password">
+              Password
+            </label>
+            {{ form.password1 }}
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="cpassword">
+              Confirm Password
+            </label>
+            {{ form.password2 }}
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="cpassword">
+              Phone
+            </label>
+            {{ form.phone_number }}
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2" for="cpassword">
+              Country
+            </label>
+            {{ form.country }}
+          </div>
+          <div class='flex justify-center space-x-8'>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Signup
+            </button>
+            <a href="{% url 'login' %}" type='button' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Log in</a>
+          </div>
+        </form>
       </div>
     </div>
-  </nav>
-
-  <form class='container mx-auto py-9 my-4'>
-    <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.last_name }}
-  
-            <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-        </div>
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.last_name }}
-            
-          <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-        </div>
-      </div>
-      <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.username }}
-  
-            <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>
-        </div>
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.email }}
-            
-          <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.password1 }}
-  
-            <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-        </div>
-        <div class="relative z-0 w-full mb-6 group">
-          {{ form.password2 }}
-            
-          <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
-        </div>
-      </div>
+    {% if errors %}
+    <div id='alert' class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <!--
+        Background backdrop, show/hide based on modal state.
     
-   
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 w-full mb-6 group">
-        {{ form.phone}}
-
-          
-          <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
-      </div>
-      <div class="relative z-0 w-full mb-6 group">
-        {{ form.country}}
-          
-          <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Country (Ex. Pakistan)</label>
+        Entering: "ease-out duration-300"
+          From: "opacity-0"
+          To: "opacity-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    
+      <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <!--
+            Modal panel, show/hide based on modal state.
+    
+            Entering: "ease-out duration-300"
+              From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              To: "opacity-100 translate-y-0 sm:scale-100"
+            Leaving: "ease-in duration-200"
+              From: "opacity-100 translate-y-0 sm:scale-100"
+              To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          -->
+          <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                  <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                  </svg>
+                </div>
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Something went wrong</h3>
+                  <div class="mt-2">
+                    <p class="text-sm text-gray-500">{{errors}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <button type="button" id='ok-button' class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Try Again</button>
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="flex justify-center items-center space-x-16">
+    {% endif %}
+    
+ 
+    {% endblock body %}
 
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-        <a href="{% url 'login' %}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log in</a>
-        
-    </div>
-  </form>
-    
-    
-</body>
-</html>
+
+    {% block script %}
+    <script>
+      const alert = document.getElementById('alert');
+      const okButton = document.getElementById('ok-button');
+
+      okButton.addEventListener('click', () => {
+        alert.classList.add('hidden');
+      });
+
+      alert.classList.remove('hidden');
+    </script>
+    {% endblock script %}
