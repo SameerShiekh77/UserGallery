@@ -40,19 +40,56 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'gallery',
-    'import_export'
+    'import_export',
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://ec2-54-85-54-221.compute-1.amazonaws.com',
+    'https://ec2-54-85-54-221.compute-1.amazonaws.com',
+]
 
+CORS_ORIGIN_WHITELIST = [
+    u'http://localhost:3000',
+    u'http://ec2-54-85-54-221.compute-1.amazonaws.com',
+    u'https://ec2-54-85-54-221.compute-1.amazonaws.com',
+]
+
+CSRF_TRUSTED_ORIGINS = CORS_ORIGIN_WHITELIST
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CSRF_HEADER_NAME = "CSRF_COOKIE"
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+CSRF_COOKIE_NAME="csrftoken"
+CSRF_HEADER_NAME="csrftoken"
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+'http://127.0.0.1:8000',
+'http://ec2-54-85-54-221.compute-1.amazonaws.com'
+    ]
 ROOT_URLCONF = 'usergallery.urls'
 
 TEMPLATES = [
@@ -140,3 +177,5 @@ if DEBUG:
     EMAIL_PORT = '2525'
     EMAIL_USE_TLS = True
     EMAIL_USE_SSL = False
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000000
